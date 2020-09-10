@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/users.css' %}">
+</head>
+<body>
+    <div class='container'>
+        <h1>All the Users</h1>
+        <div class='table'>
+            <table class="data_table">
+                <thead>
+                    <th id="th1">ID</th>
+                    <th id="th2">Name</th>
+                    <th id="th3">Email</th>
+                    <th id="th4">Age</th>
+                </thead>
+                {% if users %}
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }} </td>
+                    <td>{{ user.first_name}} {{user.last_name }}</td>
+                    <td>{{ user.email }} </td>
+                    <td>{{ user.age }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4">There is no record yet!</td>
+                </tr>
+                {% endif %}
+            </table>
+        </div>
+        <div class="form_container">
+            <h1>Add a User</h1>
+            <form action="/process" method="POST">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" name="first_name"></td>
+                        <td>Last Name</td>
+                        <td><input type="text" name="last_name"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" name="email"></td>
+                        <td>Age</td>
+                        <td><input type="text" name="age"></td>
+                        <td colspan="2"><button>Add</button></td>
+                    </tr>        
+                </table>
+            </form>
+        </div>
+
+        <div class="form_container2">
+            <h1>Update a User</h1>
+            <form action="/update" method="POST">
+                {% csrf_token %}
+                
+                Member ID
+                <input type="text" name="id">
+                <select name="update_field">
+                    <option value="first_name">First Name</option>
+                    <option value="last_name">Last Name</option>
+                    <option value="email">Email</option>
+                    <option value="age">First Name</option>
+                </select>
+                <input type="text" name="new_value">          
+                <button>Update</button>
+                
+            </form>
+        </div>
+
+        <div class="form_container3">
+            <h1>Delete a User</h1>
+            <form action="/delete" method="POST">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>Member ID <input type="text" name="id"></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

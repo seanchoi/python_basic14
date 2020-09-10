@@ -1,0 +1,23 @@
+#th1 {
+    width:50px;
+}
+
+#th2 {
+    width:150px;
+}
+
+#th3 {
+    width:200px;
+}
+
+#th4 {
+    width:50;
+}
+
+.data_table td{
+    text-align: center;
+}
+
+h1 {
+    font-family: Arial;
+}
